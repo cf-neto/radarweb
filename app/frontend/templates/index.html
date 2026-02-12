@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RadarWeb</title>
+    <link rel="stylesheet" href="/app/frontend/static/style.css" />
+    <link rel="icon" href="/app/frontend/static/img/logo.png" type="image/x-icon">   
+  </head>
+  <body>
+    <!-------------------------->
+    <!-- Container de pesquisa  -->
+    <!-------------------------->
+    <div class="container">
+      <!-- Header -->
+      <header>
+        <div class="logo-section">
+          <img src="/app/frontend/static/img/logo.png" />
+          <h1>RadarWeb</h1>
+        </div>
+      </header>
+
+      <!-- Input de pesquisa -->
+      <div class="search-website">
+        <div class="search-section">
+          <input
+            type="text"
+            placeholder="Digite a URL (ex: google.com)..."
+            id="urlInput"
+          />
+          <button onclick="check_site_status()">
+            <img src="/app/frontend/static/img/search.png" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Div para resultados -->
+      <div id="result-section">
+      </div>
+    </div>
+
+    <!-- Container para sites salvos -->
+    <div class="saved-websites">
+      
+      <!-- Header -->
+      <header>
+        <div class="logo-section">
+          <h2>Website Salvos</h2>
+        </div>
+      </header>
+
+      <!-- Div para resultados -->
+      <div id="saved-websites-id"></div>
+    </div>
+
+  </body>
+  <script src="/app/frontend/static/script.js"></script>
+</html>

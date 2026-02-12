@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+radarweb.db
+*.db
+*.sqlite3
+.env
+.DS_Store
+*.log
