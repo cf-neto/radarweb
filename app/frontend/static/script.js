@@ -55,7 +55,7 @@ async function check_site_status(urlParam = null) {
 
         <p><strong>Status:</strong> ${data.status}</p>
         <p><strong>HTTP:</strong> ${data.http_status ?? "—"}</p>
-        <p><strong>Tempo:</strong> ${data.response_time ?? "—"}s</p>
+        <p><strong>Tempo:</strong> ${data.response_time_seconds ?? "—"}s</p>
         <p><strong>URL:</strong> ${data.url}</p>
       </div>
     `;
@@ -70,11 +70,25 @@ async function check_site_status(urlParam = null) {
 // ---------------------
 async function listarWebsites() {
   const container = document.getElementById("saved-websites-id");
+  const savedWebsitesDiv = document.querySelector(".saved-websites");
+  const logoSection = document.querySelector(".saved-websites .logo-section");
+
+  savedWebsitesDiv.classList.remove("active");
+  logoSection.classList.remove("active");
+
   container.innerHTML = "";
 
   try {
     const response = await fetch(API_URL);
     const data = await response.json();
+
+    if (data.length > 0) {
+      savedWebsitesDiv.classList.add("active");
+      logoSection.classList.add("active");
+    } else{
+      savedWebsitesDiv.classList.remove("active");
+      logoSection.classList.remove("active");
+    }
 
     data.forEach((site) => {
       const favicon =
@@ -89,16 +103,27 @@ async function listarWebsites() {
             <span>${site.url}</span>
           </div>
 
-          <button 
-            class="recheck-btn"
-            onclick="check_site_status('${site.url}')"
-            title="Verificar novamente"
-          >
-            ↻
-          </button>
+          <div class="actions">
+            <button 
+              class="recheck-btn"
+              onclick="check_site_status('${site.url}')"
+              title="Verificar novamente"
+            >
+              ↻
+            </button>
+
+            <button 
+              class="delete-btn"
+              onclick="deletarWebsite(${site.id})"
+              title="Excluir website"
+            >
+              🗑
+            </button>
+          </div>
         </div>
       `;
     });
+
   } catch (error) {
     console.error("Erro ao listar websites:", error);
   }
@@ -134,3 +159,23 @@ async function salvarWebsite(nome, urlSite) {
 document.addEventListener("DOMContentLoaded", () => {
   listarWebsites();
 });
+
+
+async function deletarWebsite(id) {
+  if (!confirm("Deseja realmente excluir este website?")) return;
+
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao deletar website");
+    }
+
+    listarWebsites(); // 🔄 aggiorna UI
+  } catch (error) {
+    console.error("Erro ao deletar:", error);
+    alert("Erro ao deletar website");
+  }
+}

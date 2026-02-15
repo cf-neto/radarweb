@@ -230,7 +230,7 @@ body {
     animation: spin 0.8s linear infinite;
 }
 
-.saved-websites {
+.saved-websites.active {
     width: 30rem;
 
     background: var(--glass-bg);
@@ -243,8 +243,21 @@ body {
     padding: 2rem;
 }
 
-.save-website {
+.save-website.active {
     filter: brightness(0.9);
+}
+
+.saved-websites.active .logo-section.active {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.saved-websites .logo-section {
+    display: none;
 }
 
 .save-website:hover {
@@ -348,6 +361,39 @@ body {
     background: rgba(255, 255, 255, 0.25);
     transform: rotate(180deg) scale(0.9);
 }
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.delete-btn {
+  background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    
+    color: white;
+    font-size: 14px;
+    
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: all 0.25s ease;
+  
+}
+
+.delete-btn:hover {
+  color: red;
+}
+
+
 
 /* ------------ */
 /* Animações */
